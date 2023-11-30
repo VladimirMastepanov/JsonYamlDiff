@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "description": "second progect 'generator of difference'",
-  "main": "index.js",
+  "main": "gendiff.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,7 +14,7 @@
   "author": "Vladimir Mastepanov",
   "license": "ISC",
   "bin": {
-    "gendiff": "/gendiff.js"
+    "gendiff": "gendiff.js"
   },
   "bugs": {
     "url": "https://github.com/VladimirMastepanov/frontend-project-46/issues"
@@ -26,5 +26,6 @@
   },
   "devDependencies": {
     "jest": "^29.7.0"
-  }
+  },
+  "keywords": []
 }
