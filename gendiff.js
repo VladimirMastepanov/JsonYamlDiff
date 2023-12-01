@@ -3,7 +3,7 @@ import { program } from "commander";
 import fs from 'fs';
 import path from "path";
 import { fileURLToPath } from "url";
-import { parse, stringify } from "yaml";
+import { parse } from "yaml";
 import comparison from "./src/comparison.js";
 import _ from "lodash";
 
@@ -21,9 +21,8 @@ const gendiff = (path1, path2) => {
   const secondFile = readFile(pathToFile2);
   const parsedFile1 = pathToFile1.endsWith('json') ? parserJson(firstFile) : parse(firstFile);
   const parsedFile2 = pathToFile2.endsWith('json') ? parserJson(secondFile) : parse(secondFile);
-  const comp = comparison(parsedFile1, parsedFile2);
-  const toStr = JSON.stringify(comp)
-  return toStr;
+  const res = comparison(parsedFile1, parsedFile2);
+  return res;
 }
 
 program
@@ -36,6 +35,3 @@ program
     console.log(gendiff(filepath1, filepath2))
   })
   .parse()
-
-
-
