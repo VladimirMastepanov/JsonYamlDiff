@@ -25,6 +25,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
+      - run: npm install
       - run: make test
       - name: Test & publish code coverage
         # Publish code coverage on Code Climate
