@@ -6,7 +6,7 @@ lint:
 	npx eslint .
 
 test:
-	npx -n --experimental-vm-modules jest
+	npx --experimental-vm-modules jest
 
 test-cov:
 	npx jest --coverage

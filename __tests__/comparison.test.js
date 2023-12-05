@@ -1,4 +1,4 @@
-import { test, expect } from 'jest';
+import { test, expect } from '@jest/globals';
 import comparison from '../src/comparison.js';
 import objForTest1 from '../__fixtures__/fileExempl1.js';
 import objForTest2 from '../__fixtures__/fileExempl2.js';
