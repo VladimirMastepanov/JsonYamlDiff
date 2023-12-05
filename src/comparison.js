@@ -1,4 +1,4 @@
-import _ from "lodash"
+import _ from 'lodash';
 
 const comparison = (obj1, obj2) => {
   const keys1 = Object.keys(obj1);
@@ -6,23 +6,22 @@ const comparison = (obj1, obj2) => {
   const keys = _.union(keys1, keys2).sort();
 
   let res = '';
-    for (const key of keys) {
+  for (const key of keys) {
     if (Object.hasOwn(obj1, key) && Object.hasOwn(obj2, key)) {
       if (obj1[key] === obj2[key]) {
-        res = res + `    ${key}: ${obj1[key]}\n`;
+        res += `    ${key}: ${obj1[key]}\n`;
       } else {
-        res = res + `  - ${key}: ${obj1[key]}\n  + ${key}: ${obj2[key]}\n`
+        res += `  - ${key}: ${obj1[key]}\n  + ${key}: ${obj2[key]}\n`;
       }
     }
     if (Object.hasOwn(obj1, key) && !Object.hasOwn(obj2, key)) {
-      res = res + `  - ${key}: ${obj1[key]}\n`;
+      res += `  - ${key}: ${obj1[key]}\n`;
     }
     if (!Object.hasOwn(obj1, key) && Object.hasOwn(obj2, key)) {
-      res = res + `  + ${key}: ${obj2[key]}\n`;
+      res += `  + ${key}: ${obj2[key]}\n`;
     }
   }
   return res = `{\n${res}}`;
 };
 
 export default comparison;
-

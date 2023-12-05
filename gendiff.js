@@ -1,29 +1,30 @@
 #!/usr/bin/env node
-import { program } from "commander";
+import { program } from 'commander';
 import fs from 'fs';
-import path from "path";
-import { fileURLToPath } from "url";
-import { parse } from "yaml";
-import comparison from "./src/comparison.js";
-import _ from "lodash";
+import path, { dirname } from 'path';
+import { fileURLToPath } from 'url';
+import { parse } from 'yaml';
+import comparison from './src/comparison.js';
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = dirname(__filename);
 
 const parserJson = (str) => JSON.parse(str);
-const setPathTofile = (name) => path.resolve(process.cwd(), name);
-const readFile = (path) => fs.readFileSync(path, { encoding: 'utf8' })
+const parserYaml = (str) => parse(str);
+
+const getPathTofile = (name) => path.resolve(__dirname, name);
+const readFile = (pathFile) => fs.readFileSync(pathFile, { encoding: 'utf8' });
 
 const gendiff = (path1, path2) => {
-  const pathToFile1 = setPathTofile(path1);
-  const pathToFile2 = setPathTofile(path2);
-  const firstFile = readFile(pathToFile1);
-  const secondFile = readFile(pathToFile2);
-  const parsedFile1 = pathToFile1.endsWith('json') ? parserJson(firstFile) : parse(firstFile);
-  const parsedFile2 = pathToFile2.endsWith('json') ? parserJson(secondFile) : parse(secondFile);
-  const res = comparison(parsedFile1, parsedFile2);
+  const pathFirsFile = getPathTofile(path1);
+  const pathSecondFile = getPathTofile(path2);
+  const firstFile = readFile(pathFirsFile);
+  const secondFile = readFile(pathSecondFile);
+  const parseFirstFile = pathFirsFile.endsWith('json') ? parserJson(firstFile) : parserYaml(firstFile);
+  const parseSecondFile = pathSecondFile.endsWith('json') ? parserJson(secondFile) : parserYaml(secondFile);
+  const res = comparison(parseFirstFile, parseSecondFile);
   return res;
-}
+};
 
 program
   .name('gendiff')
@@ -32,6 +33,6 @@ program
   .arguments('<filepath1>, <filepath2>')
   .option('-f, --format <type>', 'output format')
   .action((filepath1, filepath2) => {
-    console.log(gendiff(filepath1, filepath2))
+    console.log(gendiff(filepath1, filepath2));
   })
-  .parse()
+  .parse();
