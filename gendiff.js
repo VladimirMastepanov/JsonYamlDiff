@@ -3,14 +3,11 @@ import { program } from 'commander';
 import fs from 'fs';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { parse } from 'yaml';
+import { parserJson, parserYaml } from './src/parsers.js';
 import comparison from './src/comparison.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-
-const parserJson = (str) => JSON.parse(str);
-const parserYaml = (str) => parse(str);
 
 const getPathTofile = (name) => path.resolve(__dirname, name);
 const readFile = (pathFile) => fs.readFileSync(pathFile, { encoding: 'utf8' });
