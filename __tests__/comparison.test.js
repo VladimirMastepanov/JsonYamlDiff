@@ -1,11 +1,11 @@
 import { test, expect } from '@jest/globals';
-import fs from 'fs';
-import path, { dirname } from 'path';
-import { fileURLToPath } from 'url';
-import comparison from '../src/comparison.js';
+// import fs from 'fs';
+// import path, { dirname } from 'path';
+// import { fileURLToPath } from 'url';
+import stylish from '../src/formatters/stylish.js';
 import objForTest1 from '../__fixtures__/fileExempl1.js';
 import objForTest2 from '../__fixtures__/fileExempl2.js';
-import { parserJson, parserYaml } from '../src/parsers.js';
+// import { parserJson, parserYaml } from '../src/parsers.js';
 
 // const __filename = fileURLToPath(import.meta.url);
 // const __dirname = dirname(__filename);
@@ -106,13 +106,13 @@ const str3 = `{
 }`;
 
 test('comparison two objects', () => {
-  expect(comparison(data1, data2)).toEqual(str1);
+  expect(stylish(data1, data2)).toEqual(str1);
 });
 
 test('comparison with empty', () => {
-  expect(comparison(data1, data3)).toEqual(str2);
+  expect(stylish(data1, data3)).toEqual(str2);
 });
 
 test('comparison empty with obj', () => {
-  expect(comparison(data3, data2)).toEqual(str3);
+  expect(stylish(data3, data2)).toEqual(str3);
 });

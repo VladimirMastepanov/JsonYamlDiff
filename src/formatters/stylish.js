@@ -1,7 +1,7 @@
 import _ from 'lodash';
-import stringify from './stringify.js';
+import stringify from '../tools/stringify.js';
 
-const comparison = (obj1, obj2) => {
+const stylish = (obj1, obj2) => {
   const propFirst = '- ';
   const propSecond = '+ ';
   const propGeneral = '  ';
@@ -54,4 +54,4 @@ const comparison = (obj1, obj2) => {
   return iter(obj1, obj2);
 };
 
-export default comparison;
+export default stylish;
