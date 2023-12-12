@@ -3,9 +3,10 @@ import { test, expect } from '@jest/globals';
 // import path, { dirname } from 'path';
 // import { fileURLToPath } from 'url';
 import stylish from '../src/formatters/stylish.js';
-import objForTest1 from '../__fixtures__/fileExempl1.js';
-import objForTest2 from '../__fixtures__/fileExempl2.js';
-// import { parserJson, parserYaml } from '../src/parsers.js';
+import objForTest1 from '../__fixtures__/objectForTests1.js';
+import objForTest2 from '../__fixtures__/objectForTests2.js';
+// import objectForTests3 from '../__fixtures__/objectForTests3.js';
+// import parserJson from '../src/parsers/parcerJson.js';
 
 // const __filename = fileURLToPath(import.meta.url);
 // const __dirname = dirname(__filename);
@@ -20,46 +21,53 @@ import objForTest2 from '../__fixtures__/fileExempl2.js';
 
 // const strRes = `{
 //   common: {
-//     + follow: false
+// -       + follow: false
 //       setting1: Value 1
-//     - setting2: 200
-//     - setting3: true
-//     + setting3: null
-//     + setting4: blah blah
-//     + setting5: {
-//           key5: value5
-//       }
+// -       - setting2: 200
+// +         setting2: 200
+// -       - setting3: true
+// -       + setting3: null
+// -       + setting4: blah blah
+// -       + setting5: {
+// -             key5: value5
+// -         }
+// +         setting3: true
 //       setting6: {
 //           doge: {
-//             - wow:
-//             + wow: so much
+// -               - wow:
+// -               + wow: so much
+// +                 wow:
 //           }
 //           key: value
-//         + ops: vops
+// -           + ops: vops
 //       }
 //   }
-//   group1: {
-//     - baz: bas
-//     + baz: bars
+// -     group1: {
+// +   - group1: {
+// -       - baz: bas
+// -       + baz: bars
+// +         baz: bas
 //       foo: bar
-//     - nest: {
+// -       - nest: {
+// +         nest: {
 //           key: value
 //       }
-//     + nest: str
+// -       + nest: str
 //   }
 // - group2: {
 //       abc: 12345
 //       deep: {
 //           id: 45
-//       }
-//   }
-// + group3: {
-//       deep: {
-//           id: {
-//               number: 45
-//           }
-//       }
-//       fee: 100500
+// -         }
+// -     }
+// +         }
+// -   + group3: {
+// -         deep: {
+// -             id: {
+// -                 number: 45
+// -             }
+// -         }
+// -         fee: 100500
 //   }
 // }`;
 
@@ -71,7 +79,7 @@ import objForTest2 from '../__fixtures__/fileExempl2.js';
 // const readFileJson2 = parserJson(readSecondFile);
 
 // test('recursive comparison two objects', () => {
-//   expect(comparison(readFileJson1, readFileJson2)).toEqual(strRes);
+//   expect(stylish(readFileJson1, objectForTests3)).toEqual(strRes);
 // });
 
 const data1 = objForTest1;
@@ -115,4 +123,8 @@ test('comparison with empty', () => {
 
 test('comparison empty with obj', () => {
   expect(stylish(data3, data2)).toEqual(str3);
+});
+
+test('to be string', () => {
+  expect(typeof stylish(data1, data2)).toBe('string');
 });
