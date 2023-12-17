@@ -5,6 +5,7 @@ import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import parser from './src/parsers/index.js';
 import formatter from './src/formatters/index.js';
+import comparisonDifferences from './src/comparisonDifferences.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -19,7 +20,8 @@ const gendiff = (path1, path2, format) => {
   const secondFile = readFile(pathSecondFile);
   const parseFirstFile = parser(pathFirsFile, firstFile);
   const parseSecondFile = parser(pathSecondFile, secondFile);
-  const res = formatter(parseFirstFile, parseSecondFile, format);
+  const union = comparisonDifferences(parseFirstFile, parseSecondFile);
+  const res = formatter(union, format);
   return res;
 };
 

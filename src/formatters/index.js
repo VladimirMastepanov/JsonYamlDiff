@@ -1,12 +1,15 @@
 import stylish from './stylish.js';
 import plain from './plain.js';
+import json from './json.js';
 
-const formatter = (file1, file2, format) => {
+const formatter = (data, format) => {
   let res;
   if (format === 'plain') {
-    res = plain(file1, file2);
+    res = plain(data);
+  } else if (format === 'json') {
+    res = json(data);
   } else {
-    res = stylish(file1, file2);
+    res = stylish(data);
   }
   return res;
 };

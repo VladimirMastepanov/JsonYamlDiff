@@ -1,50 +1,34 @@
 import _ from 'lodash';
+import quotesForString from './tools/quotesForString.js';
 
-const quotesForString = (data) => {
-  if (typeof data === 'string') {
-    return `'${data}'`;
-  }
-  return data;
-};
-
-const plain = (data1, data2) => {
-  const iter = (obj1, obj2, ancestry, count = 0) => {
-    const keys1 = Object.keys(obj1);
-    const keys2 = Object.keys(obj2);
-    const keys = _.union(keys1, keys2).sort();
-    const res = keys.reduce(((acc, key) => {
-      ancestry.push(key);
-      console.log(ancestry, count);
-      if (!Object.hasOwn(obj1, key)) {
-        if (_.isObject(obj2[key])) {
-          acc.push(`Property '${ancestry.join('.')}' was added with value: [complex value]`);
-          ancestry.splice(0, count);
+const plain = (data) => {
+  const iter = (obj, ancestry = '') => {
+    const res = obj.reduce(((acc, el, index, arr) => {
+      const newAncestry = _.compact([ancestry, el.key]).join('.');
+      if (el.type === 'deleted') {
+        acc.push(`Property '${newAncestry}' was removed`);
+      } else if (el.type === 'added') {
+        if (Array.isArray(el.value) || _.isObject(el.value)) {
+          acc.push(`Property '${newAncestry}' was added with value: [complex value]`);
         } else {
-          acc.push(`Property '${ancestry.join('.')}' was added with value: ${quotesForString(obj2[key])}`);
-          ancestry.splice(0, count);
+          acc.push(`Property '${newAncestry}' was added with value: ${quotesForString(el.value)}`);
         }
-      } else if (!Object.hasOwn(obj2, key)) {
-        acc.push(`Property '${ancestry.join('.')}' was removed`);
-        ancestry.splice(0, count);
-      } else if (_.isObject(obj1[key]) && !_.isObject(obj2[key])) {
-        acc.push(`Property '${ancestry.join('.')}' was updated. From [complex value] to ${quotesForString(obj2[key])})`);
-        ancestry.splice(0, count);
-      } else if (!_.isObject(obj1[key]) && _.isObject(obj2[key])) {
-        acc.push(`Property '${ancestry.join('.')}' was updated. From ${quotesForString(obj1[key])} to [complex value]`);
-        ancestry.splice(0, count);
-      } else if (!_.isObject(obj1[key]) && !_.isObject(obj2[key]) && obj1[key] !== obj2[key]) {
-        acc.push(`Property '${ancestry.join('.')}' was updated. From ${quotesForString(obj1[key])} to ${quotesForString(obj2[key])}`);
-        ancestry.splice(count, ancestry.length);
-      } else if (obj1[key] === obj2[key]) {
-        ancestry.splice(0, count);
-      } else if (_.isObject(obj1[key]) && _.isObject(obj2[key])) {
-        acc.push(iter(obj1[key], obj2[key], ancestry, count + 1));
+      } else if (el.type === 'unchanged' && Array.isArray(el.value)) {
+        acc.push(iter(el.value, newAncestry));
+      } else if (el.type === 'changedFrom') {
+        if (Array.isArray(el.value) || _.isObject(el.value)) {
+          const { value } = arr[index + 1];
+          acc.push(`Property '${newAncestry}' was updated. From [complex value] to ${quotesForString(value)}`);
+        } else {
+          const { value } = arr[index + 1];
+          acc.push(`Property '${newAncestry}' was updated. From ${quotesForString(el.value)} to ${quotesForString(value)}`);
+        }
       }
       return acc;
     }), []);
     return [...res].join('\n');
   };
-  return iter(data1, data2, []);
+  return iter(data);
 };
 
 export default plain;
