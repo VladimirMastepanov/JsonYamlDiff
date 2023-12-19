@@ -14,7 +14,7 @@
   "author": "Vladimir Mastepanov",
   "license": "ISC",
   "bin": {
-    "gendiff": "gendiff.js"
+    "gendiff": "bin/gendiff.js"
   },
   "bugs": {
     "url": "https://github.com/VladimirMastepanov/frontend-project-46/issues"

@@ -6,10 +6,16 @@ const arrayForTest = [
       { type: 'added', key: 'follow', value: false },
       { type: 'unchanged', key: 'setting1', value: 'Value 1' },
       { type: 'deleted', key: 'setting2', value: 200 },
-      { type: 'changedFrom', key: 'setting3', value: true },
-      { type: 'changedTo', key: 'setting3', value: null },
+      {
+        type: 'changed', key: 'setting3', value: true, value2: null,
+      },
       { type: 'added', key: 'setting4', value: 'blah blah' },
-      { type: 'added', key: 'setting5', value: { key5: 'value5' } },
+      {
+        type: 'added',
+        key: 'setting5',
+        value: { key5: 'value5', type: 'nested' },
+      },
+
       {
         type: 'unchanged',
         key: 'setting6',
@@ -17,8 +23,9 @@ const arrayForTest = [
           type: 'unchanged',
           key: 'doge',
           value: [
-            { type: 'changedFrom', key: 'wow', value: '' },
-            { type: 'changedTo', key: 'wow', value: 'so much' },
+            {
+              type: 'changed', key: 'wow', value: '', value2: 'so much',
+            },
           ],
         },
         { type: 'unchanged', key: 'key', value: 'value' },
@@ -31,12 +38,19 @@ const arrayForTest = [
     type: 'unchanged',
     key: 'group1',
     value: [
-      { type: 'changedFrom', key: 'baz', value: 'bas' },
-      { type: 'changedTo', key: 'baz', value: 'bars' },
+      {
+        type: 'changed', key: 'baz', value: 'bas', value2: 'bars',
+      },
       { type: 'unchanged', key: 'foo', value: 'bar' },
-      { type: 'changedFrom', key: 'nest', value: { key: 'value' } },
-      { type: 'changedTo', key: 'nest', value: 'str' }],
+      {
+        type: 'changed',
+        key: 'nest',
+        value: { key: 'value', type: 'nested' },
+        value2: 'str',
+      },
+    ],
   },
+
   {
     type: 'deleted',
     key: 'group2',
@@ -45,6 +59,7 @@ const arrayForTest = [
       deep: {
         id: 45,
       },
+      type: 'nested',
     },
   },
   {
@@ -57,6 +72,7 @@ const arrayForTest = [
         },
       },
       fee: 100500,
+      type: 'nested',
     },
   },
 ];
