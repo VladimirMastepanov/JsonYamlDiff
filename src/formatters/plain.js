@@ -1,32 +1,39 @@
 import _ from 'lodash';
-import quotesForString from './tools/quotesForString.js';
+
+const quotesForString = (data) => {
+  if (typeof data === 'string') {
+    return `'${data}'`;
+  }
+  return data;
+};
+
+const dataAnalis = (data) => {
+  if (Array.isArray(data) || _.isObject(data)) {
+    return '[complex value]';
+  }
+  return quotesForString(data);
+};
 
 const plain = (data) => {
   const iter = (obj, ancestry = '') => {
-    const res = obj.reduce(((acc, el, index, arr) => {
+    const res = obj.map((el) => {
       const newAncestry = _.compact([ancestry, el.key]).join('.');
-      if (el.type === 'deleted') {
-        acc.push(`Property '${newAncestry}' was removed`);
-      } else if (el.type === 'added') {
-        if (Array.isArray(el.value) || _.isObject(el.value)) {
-          acc.push(`Property '${newAncestry}' was added with value: [complex value]`);
-        } else {
-          acc.push(`Property '${newAncestry}' was added with value: ${quotesForString(el.value)}`);
-        }
-      } else if (el.type === 'unchanged' && Array.isArray(el.value)) {
-        acc.push(iter(el.value, newAncestry));
-      } else if (el.type === 'changedFrom') {
-        if (Array.isArray(el.value) || _.isObject(el.value)) {
-          const { value } = arr[index + 1];
-          acc.push(`Property '${newAncestry}' was updated. From [complex value] to ${quotesForString(value)}`);
-        } else {
-          const { value } = arr[index + 1];
-          acc.push(`Property '${newAncestry}' was updated. From ${quotesForString(el.value)} to ${quotesForString(value)}`);
-        }
+      switch (el.type) {
+        case 'unchanged':
+          return '';
+        case 'deleted':
+          return `Property '${newAncestry}' was removed`;
+        case 'added':
+          return `Property '${newAncestry}' was added with value: ${dataAnalis(el.value)}`;
+        case 'changed':
+          return `Property '${newAncestry}' was updated. From ${dataAnalis(el.value)} to ${dataAnalis(el.value2)}`;
+        case 'nested':
+          return iter(el.value, newAncestry);
+        default:
+          throw new Error('plain function crashing');
       }
-      return acc;
-    }), []);
-    return [...res].join('\n');
+    });
+    return _.compact([...res]).join('\n');
   };
   return iter(data);
 };

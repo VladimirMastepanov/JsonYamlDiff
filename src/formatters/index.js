@@ -3,15 +3,16 @@ import plain from './plain.js';
 import json from './json.js';
 
 const formatter = (data, format) => {
-  let res;
-  if (format === 'plain') {
-    res = plain(data);
-  } else if (format === 'json') {
-    res = json(data);
-  } else {
-    res = stylish(data);
+  switch (format) {
+    case 'plain':
+      return plain(data);
+    case 'json':
+      return json(data);
+    case undefined:
+      return stylish(data);
+    default:
+      throw new Error('Unknown formatting style');
   }
-  return res;
 };
 
 export default formatter;
