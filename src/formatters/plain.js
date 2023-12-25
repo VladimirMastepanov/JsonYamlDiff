@@ -1,17 +1,13 @@
 import _ from 'lodash';
 
-const quotesForString = (data) => {
+const stringify = (data) => {
+  if (Array.isArray(data) || _.isObject(data)) {
+    return '[complex value]';
+  }
   if (typeof data === 'string') {
     return `'${data}'`;
   }
   return data;
-};
-
-const dataAnalis = (data) => {
-  if (Array.isArray(data) || _.isObject(data)) {
-    return '[complex value]';
-  }
-  return quotesForString(data);
 };
 
 const plain = (data) => {
@@ -20,15 +16,15 @@ const plain = (data) => {
       const newAncestry = _.compact([ancestry, el.key]).join('.');
       switch (el.type) {
         case 'unchanged':
-          return '';
+          return null;
         case 'deleted':
           return `Property '${newAncestry}' was removed`;
         case 'added':
-          return `Property '${newAncestry}' was added with value: ${dataAnalis(el.value)}`;
+          return `Property '${newAncestry}' was added with value: ${stringify(el.value1)}`;
         case 'changed':
-          return `Property '${newAncestry}' was updated. From ${dataAnalis(el.value)} to ${dataAnalis(el.value2)}`;
+          return `Property '${newAncestry}' was updated. From ${stringify(el.value1)} to ${stringify(el.value2)}`;
         case 'nested':
-          return iter(el.value, newAncestry);
+          return iter(el.children, newAncestry);
         default:
           throw new Error('plain function crashing');
       }

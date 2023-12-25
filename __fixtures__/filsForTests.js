@@ -1,8 +1,8 @@
+import _ from 'lodash';
 import fs from 'fs';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import typeFile from '../src/typeFile.js';
-import parser from '../src/parser.js';
+import parse from '../src/parse.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -17,10 +17,10 @@ const pathFile1 = getPathTofile(file1J);
 const pathFile2 = getPathTofile(file2J);
 const file1 = readFile(pathFile1);
 const file2 = readFile(pathFile2);
-const typeFile1 = typeFile(pathFile1);
-const typeFile2 = typeFile(pathFile2);
-const fileFoComparison1 = parser(typeFile1, file1);
-const fileFoComparison2 = parser(typeFile2, file2);
+const typeFile1 = pathFile1.substring(_.lastIndexOf(pathFile1, '.') + 1);
+const typeFile2 = pathFile2.substring(_.lastIndexOf(pathFile2, '.') + 1);
+const fileFoComparison1 = parse(typeFile1, file1);
+const fileFoComparison2 = parse(typeFile2, file2);
 
 export {
   file1,

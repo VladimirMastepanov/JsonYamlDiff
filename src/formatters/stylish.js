@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-const marge = (spaseCount, bracket = ' ', bracketQuantity = 4) => bracket
+const getIndent = (spaseCount, bracket = ' ', bracketQuantity = 4) => bracket
   .repeat(bracketQuantity * spaseCount - bracketQuantity);
 
 const stringify = (obj, replace) => {
@@ -9,7 +9,7 @@ const stringify = (obj, replace) => {
       return `${data}`;
     }
     const spaseCount = depth * replace;
-    const spase = marge(spaseCount);
+    const spase = getIndent(spaseCount);
     const lines = Object
       .entries(data)
       .map(([key, value]) => `${spase}        ${key}: ${iter(value, depth + 1)}`);
@@ -21,24 +21,27 @@ const stringify = (obj, replace) => {
 
 const stylish = (obj) => {
   const iter = (data, spaseCount = 1) => {
-    const spase = marge(spaseCount);
+    const indent = getIndent(spaseCount);
     const res = data.map((el) => {
       switch (el.type) {
         case 'deleted':
-          return `${spase}  - ${el.key}: ${stringify(el.value, spaseCount)}`;
+          return `${indent}  - ${el.key}: ${stringify(el.value1, spaseCount)}`;
         case 'added':
-          return `${spase}  + ${el.key}: ${stringify(el.value, spaseCount)} `;
+          return `${indent}  + ${el.key}: ${stringify(el.value1, spaseCount)} `;
         case 'changed':
-          return `${spase}  - ${el.key}: ${stringify(el.value, spaseCount)}\n${spase}  + ${el.key}: ${stringify(el.value2, spaseCount)}`;
+          return [
+            `${indent}  - ${el.key}: ${stringify(el.value1, spaseCount)}`,
+            `${indent}  + ${el.key}: ${stringify(el.value2, spaseCount)}`,
+          ].join('\n');
         case 'unchanged':
-          return `${spase}    ${el.key}: ${stringify(el.value, spaseCount)}`;
+          return `${indent}    ${el.key}: ${stringify(el.value1, spaseCount)}`;
         case 'nested':
-          return `${spase}    ${el.key}: ${iter(el.value, spaseCount + 1)} `;
+          return `${indent}    ${el.key}: ${iter(el.children, spaseCount + 1)} `;
         default:
           throw new Error('stylish function crashing');
       }
     });
-    return ['{', ...res, `${spase}}`].join('\n');
+    return ['{', ...res, `${indent}}`].join('\n');
   };
   return iter(obj);
 };

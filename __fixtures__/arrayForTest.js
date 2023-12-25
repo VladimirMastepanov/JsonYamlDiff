@@ -2,33 +2,33 @@ const arrayForTest = [
   {
     type: 'nested',
     key: 'common',
-    value: [
-      { type: 'added', key: 'follow', value: false },
-      { type: 'unchanged', key: 'setting1', value: 'Value 1' },
-      { type: 'deleted', key: 'setting2', value: 200 },
+    children: [
+      { type: 'added', key: 'follow', value1: false },
+      { type: 'unchanged', key: 'setting1', value1: 'Value 1' },
+      { type: 'deleted', key: 'setting2', value1: 200 },
       {
-        type: 'changed', key: 'setting3', value: true, value2: null,
+        type: 'changed', key: 'setting3', value1: true, value2: null,
       },
-      { type: 'added', key: 'setting4', value: 'blah blah' },
-      { type: 'added', key: 'setting5', value: { key5: 'value5' } },
+      { type: 'added', key: 'setting4', value1: 'blah blah' },
+      { type: 'added', key: 'setting5', value1: { key5: 'value5' } },
       {
         type: 'nested',
         key: 'setting6',
-        value: [
+        children: [
           {
             type: 'nested',
             key: 'doge',
-            value: [
+            children: [
               {
                 type: 'changed',
                 key: 'wow',
-                value: '',
+                value1: '',
                 value2: 'so much',
               },
             ],
           },
-          { type: 'unchanged', key: 'key', value: 'value' },
-          { type: 'added', key: 'ops', value: 'vops' },
+          { type: 'unchanged', key: 'key', value1: 'value' },
+          { type: 'added', key: 'ops', value1: 'vops' },
         ],
       },
     ],
@@ -36,15 +36,15 @@ const arrayForTest = [
   {
     type: 'nested',
     key: 'group1',
-    value: [
+    children: [
       {
-        type: 'changed', key: 'baz', value: 'bas', value2: 'bars',
+        type: 'changed', key: 'baz', value1: 'bas', value2: 'bars',
       },
-      { type: 'unchanged', key: 'foo', value: 'bar' },
+      { type: 'unchanged', key: 'foo', value1: 'bar' },
       {
         type: 'changed',
         key: 'nest',
-        value: { key: 'value' },
+        value1: { key: 'value' },
         value2: 'str',
       },
     ],
@@ -53,12 +53,12 @@ const arrayForTest = [
   {
     type: 'deleted',
     key: 'group2',
-    value: { abc: 12345, deep: { id: 45 } },
+    value1: { abc: 12345, deep: { id: 45 } },
   },
   {
     type: 'added',
     key: 'group3',
-    value: { deep: { id: { number: 45 } }, fee: 100500 },
+    value1: { deep: { id: { number: 45 } }, fee: 100500 },
   },
 ];
 

@@ -6,43 +6,22 @@ const comparisonDifferences = (obj1, obj2) => {
   const keys = _.union(keys1, keys2).sort();
   const res = keys.map((key) => {
     if (!Object.hasOwn(obj2, key)) {
-      const newObj = _.cloneDeep(obj1[key]);
-      const [newKey] = [key];
       return {
-        type: 'deleted', key: newKey, value: newObj,
+        type: 'deleted', key, value1: obj1[key],
       };
     }
     if (!Object.hasOwn(obj1, key)) {
-      const newObj = _.cloneDeep(obj2[key]);
-      const [newKey] = [key];
-      return { type: 'added', key: newKey, value: newObj };
-    }
-    if (_.isObject(obj1[key]) && !_.isObject(obj2[key])) {
-      const newObj = _.cloneDeep(obj1[key]);
-      const [newKey] = [key];
-      return {
-        type: 'changed', key: newKey, value: newObj, value2: obj2[key],
-      };
-    }
-    if (!_.isObject(obj1[key]) && _.isObject(obj2[key])) {
-      const newObj = _.cloneDeep(obj2[key]);
-      const [newKey] = [key];
-      return {
-        type: 'changed', key: newKey, value: obj1[key], value2: newObj,
-      };
+      return { type: 'added', key, value1: obj2[key] };
     }
     if (_.isObject(obj1[key]) && _.isObject(obj2[key])) {
-      const [newKey] = [key];
-      return { type: 'nested', key: newKey, value: comparisonDifferences(obj1[key], obj2[key]) };
+      return { type: 'nested', key, children: comparisonDifferences(obj1[key], obj2[key]) };
     }
     if (obj1[key] !== obj2[key]) {
-      const [newKey] = [key];
       return {
-        type: 'changed', key: newKey, value: obj1[key], value2: obj2[key],
+        type: 'changed', key, value1: obj1[key], value2: obj2[key],
       };
     }
-    const [newKey] = [key];
-    return { type: 'unchanged', key: newKey, value: obj1[key] };
+    return { type: 'unchanged', key, value1: obj1[key] };
   });
   return res;
 };
