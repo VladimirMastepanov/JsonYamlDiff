@@ -9,7 +9,7 @@ import comparisonDifferences from './comparisonDifferences.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const getPathTofile = (name) => path.resolve(__dirname, name);
+const getPathTofile = (name) => path.resolve(__dirname, '..', name);
 const readFile = (pathFile) => fs.readFileSync(pathFile, { encoding: 'utf8' });
 
 const gendiff = (path1, path2, format) => {
