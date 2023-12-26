@@ -27,7 +27,7 @@ const stylish = (obj) => {
         case 'deleted':
           return `${indent}  - ${el.key}: ${stringify(el.value1, spaseCount)}`;
         case 'added':
-          return `${indent}  + ${el.key}: ${stringify(el.value1, spaseCount)} `;
+          return `${indent}  + ${el.key}: ${stringify(el.value1, spaseCount)}`;
         case 'changed':
           return [
             `${indent}  - ${el.key}: ${stringify(el.value1, spaseCount)}`,
@@ -36,7 +36,7 @@ const stylish = (obj) => {
         case 'unchanged':
           return `${indent}    ${el.key}: ${stringify(el.value1, spaseCount)}`;
         case 'nested':
-          return `${indent}    ${el.key}: ${iter(el.children, spaseCount + 1)} `;
+          return `${indent}    ${el.key}: ${iter(el.children, spaseCount + 1)}`;
         default:
           throw new Error('stylish function crashing');
       }

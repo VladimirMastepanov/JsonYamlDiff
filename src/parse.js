@@ -5,9 +5,9 @@ const parse = (type, file) => {
     case 'json':
       return JSON.parse(file);
     case 'yaml':
-      return yamlParse(file);
+      return yamlParse(file, { schema: 'failsafe' });
     case 'yml':
-      return yamlParse(file);
+      return yamlParse(file, { schema: 'failsafe' });
     default:
       return `Unknown type file: ${type}`;
   }
