@@ -1,5 +1,5 @@
 import { test, expect } from '@jest/globals';
-import gendiff from '../src/gendiff.js';
+import gendiff from '../src/index.js';
 // import jsonStringForTest from '../__fixtures__/jsonStringForTest.js';
 import plainStringForTest from '../__fixtures__/plainStringForTest.js';
 
