@@ -24,18 +24,18 @@ const stylish = (obj) => {
     const res = data.map((el) => {
       switch (el.type) {
         case 'deleted':
-          return _.trimEnd(`${indent}  - ${el.key}: ${stringify(el.value1, spaseCount)}`);
+          return `${indent}  - ${el.key}: ${stringify(el.value1, spaseCount)}`;
         case 'added':
-          return _.trimEnd(`${indent}  + ${el.key}: ${stringify(el.value1, spaseCount)}`);
+          return `${indent}  + ${el.key}: ${stringify(el.value1, spaseCount)}`;
         case 'changed':
           return [
-            _.trimEnd(`${indent}  - ${el.key}: ${stringify(el.value1, spaseCount)}`),
-            _.trimEnd(`${indent}  + ${el.key}: ${stringify(el.value2, spaseCount)}`),
+            `${indent}  - ${el.key}: ${stringify(el.value1, spaseCount)}`,
+            `${indent}  + ${el.key}: ${stringify(el.value2, spaseCount)}`,
           ].join('\n');
         case 'unchanged':
-          return _.trimEnd(`${indent}    ${el.key}: ${stringify(el.value1, spaseCount)}`);
+          return `${indent}    ${el.key}: ${stringify(el.value1, spaseCount)}`;
         case 'nested':
-          return _.trimEnd(`${indent}    ${el.key}: ${iter(el.children, spaseCount + 1)}`);
+          return `${indent}    ${el.key}: ${iter(el.children, spaseCount + 1)}`;
         default:
           throw new Error('stylish function crashing');
       }
