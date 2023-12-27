@@ -2,7 +2,7 @@ import _ from 'lodash';
 import fs from 'fs';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import parse from './parse.js';
+import parser from './parse.js';
 import formatter from './formatters/index.js';
 import comparisonDifferences from './comparisonDifferences.js';
 
@@ -19,8 +19,8 @@ const gendiff = (path1, path2, format) => {
   const file2 = readFile(pathFile2);
   const typeFile1 = pathFile1.substring(_.lastIndexOf(pathFile1, '.') + 1);
   const typeFile2 = pathFile2.substring(_.lastIndexOf(pathFile2, '.') + 1);
-  const parseFile1 = parse(typeFile1, file1);
-  const parseFile2 = parse(typeFile2, file2);
+  const parseFile1 = parser(typeFile1, file1);
+  const parseFile2 = parser(typeFile2, file2);
   const union = comparisonDifferences(parseFile1, parseFile2);
   const res = formatter(union, format);
   return res;

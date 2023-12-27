@@ -1,13 +1,13 @@
-import { parse as yamlParse } from 'yaml';
+import yaml from 'js-yaml';
 
 const parse = (type, file) => {
   switch (type) {
     case 'json':
       return JSON.parse(file);
     case 'yaml':
-      return yamlParse(file, { schema: 'failsafe' });
+      return yaml.load(file);
     case 'yml':
-      return yamlParse(file, { schema: 'failsafe' });
+      return yaml.load(file);
     default:
       return `Unknown type file: ${type}`;
   }

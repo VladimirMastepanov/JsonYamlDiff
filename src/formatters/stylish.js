@@ -13,7 +13,6 @@ const stringify = (obj, replace) => {
     const lines = Object
       .entries(data)
       .map(([key, value]) => `${spase}        ${key}: ${iter(value, depth + 1)}`);
-
     return ['{', ...lines, `${spase}    }`].join('\n');
   };
   return iter(obj, 1);
@@ -25,18 +24,18 @@ const stylish = (obj) => {
     const res = data.map((el) => {
       switch (el.type) {
         case 'deleted':
-          return `${indent}  - ${el.key}: ${stringify(el.value1, spaseCount)}`;
+          return _.trimEnd(`${indent}  - ${el.key}: ${stringify(el.value1, spaseCount)}`);
         case 'added':
-          return `${indent}  + ${el.key}: ${stringify(el.value1, spaseCount)}`;
+          return _.trimEnd(`${indent}  + ${el.key}: ${stringify(el.value1, spaseCount)}`);
         case 'changed':
           return [
-            `${indent}  - ${el.key}: ${stringify(el.value1, spaseCount)}`,
-            `${indent}  + ${el.key}: ${stringify(el.value2, spaseCount)}`,
+            _.trimEnd(`${indent}  - ${el.key}: ${stringify(el.value1, spaseCount)}`),
+            _.trimEnd(`${indent}  + ${el.key}: ${stringify(el.value2, spaseCount)}`),
           ].join('\n');
         case 'unchanged':
-          return `${indent}    ${el.key}: ${stringify(el.value1, spaseCount)}`;
+          return _.trimEnd(`${indent}    ${el.key}: ${stringify(el.value1, spaseCount)}`);
         case 'nested':
-          return `${indent}    ${el.key}: ${iter(el.children, spaseCount + 1)}`;
+          return _.trimEnd(`${indent}    ${el.key}: ${iter(el.children, spaseCount + 1)}`);
         default:
           throw new Error('stylish function crashing');
       }
