@@ -15,8 +15,8 @@ const jsonPath2 = '__fixtures__/file2.json';
 const yamlPath1 = '__fixtures__/file1.yml';
 const ymlPath2 = '__fixtures__/file2.yml';
 
-const plainStringForTest = 'plainStringForTest.txt';
-const stylishStringForTest = 'stylishStringForTest.txt';
+const plainStringForTest = 'result_plain.txt';
+const stylishStringForTest = 'result_stylish.txt';
 
 const pathPlainResult = getPathTofile(plainStringForTest);
 const plainResult = readFile(pathPlainResult);
