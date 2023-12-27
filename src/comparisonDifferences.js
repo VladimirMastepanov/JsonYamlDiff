@@ -3,8 +3,9 @@ import _ from 'lodash';
 const comparisonDifferences = (obj1, obj2) => {
   const keys1 = Object.keys(obj1);
   const keys2 = Object.keys(obj2);
-  const keys = _.union(keys1, keys2).sort();
-  const res = keys.map((key) => {
+  const keys = _.union(keys1, keys2);
+  const sortedKeys = keys.sort();
+  const res = sortedKeys.map((key) => {
     if (!Object.hasOwn(obj2, key)) {
       return {
         type: 'deleted', key, value1: obj1[key],
