@@ -7,10 +7,11 @@ const formatter = (data, format) => {
       return plain(data);
     case 'json':
       return JSON.stringify(data);
-    case undefined:
-      return stylish(data);
+    // case undefined:
+    //   return stylish(data);
     default:
-      throw new Error('Unknown formatting style');
+      return stylish(data);
+      // throw new Error('Unknown formatting style');
   }
 };
 
