@@ -9,21 +9,25 @@ import comparisonDifferences from './comparisonDifferences.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const getPathTofile = (name) => path.resolve(__dirname, '..', name);
+const getPathToFile = (name) => path.resolve(__dirname, '..', name);
 const readFile = (pathFile) => fs.readFileSync(pathFile, { encoding: 'utf8' });
 
-const gendiff = (path1, path2, format) => {
-  const pathFile1 = getPathTofile(path1);
-  const pathFile2 = getPathTofile(path2);
-  const file1 = readFile(pathFile1);
-  const file2 = readFile(pathFile2);
-  const typeFile1 = pathFile1.substring(_.lastIndexOf(pathFile1, '.') + 1);
-  const typeFile2 = pathFile2.substring(_.lastIndexOf(pathFile2, '.') + 1);
-  const parseFile1 = parser(typeFile1, file1);
-  const parseFile2 = parser(typeFile2, file2);
-  const union = comparisonDifferences(parseFile1, parseFile2);
-  const res = formatter(union, format);
-  return res;
+const getConnect = (pathFile) => {
+  const data = readFile(pathFile);
+  const type = pathFile.substring(_.lastIndexOf(pathFile, '.') + 1);
+  return parser(data, type);
+};
+
+const gendiff = (path1, path2, format = 'stylish') => {
+  const pathFile1 = getPathToFile(path1);
+  const pathFile2 = getPathToFile(path2);
+  const data1 = getConnect(pathFile1);
+  const data2 = getConnect(pathFile2);
+  const union = comparisonDifferences(data1, data2);
+  if (format === 'plain' || format === 'json' || format === 'stylish') {
+    return formatter(union, format);
+  }
+  return 'Unknown formatting style';
 };
 
 export default gendiff;
