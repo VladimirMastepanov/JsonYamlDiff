@@ -24,10 +24,7 @@ const gendiff = (path1, path2, format = 'stylish') => {
   const data1 = getConnect(pathFile1);
   const data2 = getConnect(pathFile2);
   const union = comparisonDifferences(data1, data2);
-  if (format === 'plain' || format === 'json' || format === 'stylish') {
-    return formatter(union, format);
-  }
-  return 'Unknown formatting style';
+  return formatter(union, format);
 };
 
 export default gendiff;

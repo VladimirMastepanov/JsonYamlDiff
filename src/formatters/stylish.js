@@ -24,20 +24,20 @@ const stylish = (obj) => {
     const res = data.map((el) => {
       switch (el.type) {
         case 'deleted':
-          return `${indent}  - ${el.key}: ${stringify(el.value1, spaseCount)}`;
+          return `${indent}  - ${el.key}: ${stringify(el.value, spaseCount)}`;
         case 'added':
-          return `${indent}  + ${el.key}: ${stringify(el.value1, spaseCount)}`;
+          return `${indent}  + ${el.key}: ${stringify(el.value, spaseCount)}`;
         case 'changed':
           return [
             `${indent}  - ${el.key}: ${stringify(el.value1, spaseCount)}`,
             `${indent}  + ${el.key}: ${stringify(el.value2, spaseCount)}`,
           ].join('\n');
         case 'unchanged':
-          return `${indent}    ${el.key}: ${stringify(el.value1, spaseCount)}`;
+          return `${indent}    ${el.key}: ${stringify(el.value, spaseCount)}`;
         case 'nested':
           return `${indent}    ${el.key}: ${iter(el.children, spaseCount + 1)}`;
         default:
-          throw new Error('stylish function crashing');
+          throw new Error(`${el.type} is unknown comparison type`);
       }
     });
     return ['{', ...res, `${indent}}`].join('\n');

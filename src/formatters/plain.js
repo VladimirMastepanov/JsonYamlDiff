@@ -20,7 +20,7 @@ const plain = (data) => {
         case 'deleted':
           return `Property '${newAncestry}' was removed`;
         case 'added':
-          return `Property '${newAncestry}' was added with value: ${stringify(el.value1)}`;
+          return `Property '${newAncestry}' was added with value: ${stringify(el.value)}`;
         case 'changed':
           return `Property '${newAncestry}' was updated. From ${stringify(el.value1)} to ${stringify(el.value2)}`;
         case 'nested':
