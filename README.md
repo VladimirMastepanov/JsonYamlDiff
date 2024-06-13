@@ -1,4 +1,4 @@
-[![Actions Status](https://github.com/VladimirMastepanov/frontend-project-46/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/VladimirMastepanov/frontend-project-46/actions) [![Maintainability](https://api.codeclimate.com/v1/badges/e856060bb13eba1be9a7/maintainability)](https://codeclimate.com/github/VladimirMastepanov/frontend-project-46/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/e856060bb13eba1be9a7/test_coverage)](https://codeclimate.com/github/VladimirMastepanov/frontend-project-46/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/e856060bb13eba1be9a7/maintainability)](https://codeclimate.com/github/VladimirMastepanov/frontend-project-46/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/e856060bb13eba1be9a7/test_coverage)](https://codeclimate.com/github/VladimirMastepanov/frontend-project-46/test_coverage)
 ___
 ## Comparison two JSON or YML files
 
