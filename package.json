@@ -1,8 +1,8 @@
 {
-  "name": "@hexlet/code",
+  "name": "JsonYamlDiff",
   "version": "1.0.0",
   "type": "module",
-  "description": "second progect 'generator of difference'",
+  "description": "A command-line tool for comparing JSON and YAML files, highlighting differences in structure and content.",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
