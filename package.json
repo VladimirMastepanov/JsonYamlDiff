@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/VladimirMastepanov/frontend-project-46.git"
+    "url": "git+ssh://git@github.com/VladimirMastepanov/JsonYamlDiff.git"
   },
   "author": "Vladimir Mastepanov",
   "license": "ISC",
@@ -17,9 +17,9 @@
     "gendiff": "bin/gendiff.js"
   },
   "bugs": {
-    "url": "https://github.com/VladimirMastepanov/frontend-project-46/issues"
+    "url": "https://github.com/VladimirMastepanov/JsonYamlDiff/issues"
   },
-  "homepage": "https://github.com/VladimirMastepanov/frontend-project-46#readme",
+  "homepage": "https://github.com/VladimirMastepanov/JsonYamlDiff#readme",
   "dependencies": {
     "commander": "^11.1.0",
     "js-yaml": "^4.1.0",

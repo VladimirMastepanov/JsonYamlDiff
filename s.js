@@ -19,4 +19,5 @@
 //   });
 // };
 
+// eslint-disable-next-line max-len
 // getFileOwners('/Users/vladimirmastepanov/frontend-project-46/__fixtures__', (err, el) => console.log(el));

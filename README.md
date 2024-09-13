@@ -1,39 +1,80 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/e856060bb13eba1be9a7/maintainability)](https://codeclimate.com/github/VladimirMastepanov/frontend-project-46/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/e856060bb13eba1be9a7/test_coverage)](https://codeclimate.com/github/VladimirMastepanov/frontend-project-46/test_coverage)
 ___
-## Comparison two JSON or YML files
-
-
-
-### This is a simple console program to compare two files in format JSON and YAML
+#### JsonYamlDiff – Command-Line Tool for Comparing JSON and YAML Files
+**JsonYamlDiff** is a simple and efficient command-line tool designed to compare JSON and YAML files, highlighting differences in both structure and content. It provides an easy way to spot changes between configuration files or data sets, making it an essential utility for developers and system administrators.
 ___
 
-##### Help and additional information
+#### Features
+* Supports JSON and YAML formats: Easily compare JSON and YAML files side-by-side.
+* Detailed comparison: Identifies and displays differences in file structure, values, and types.
+* Command-line interface: Simple CLI commands for quick comparisons.
+* Cross-platform: Works on any system that supports Node.js.
 
-    $ gendiff -h
 
-There are three options for displaying the comparison result:
+#### Installation
+To use this tool, you'll need Node.js installed on your machine. Then, install the package globally.
+```
+# Clone the repository
+git clone git@github.com:VladimirMastepanov/JsonYamlDiff.git
 
-* stylish (default)
-* plain
-* json
+# Navigate to the project directory
+cd JsonYamlDiff
 
-###### To display the comparison result in the format stylish (default):
+# Install dependencies
+npm install
 
-    $ gendiff <filepath1> <filepath2>
-[![asciicast](https://asciinema.org/a/8Au77dzLxiiQtHRNXm6AjeTNW.svg)](https://asciinema.org/a/8Au77dzLxiiQtHRNXm6AjeTNW)
+# Optionally, install globally
+npm install -g
+```
 
+#### Usage
+To compare two files, run the gendiff command:
+```
+gendiff <file1> <file2>
+```
+For example:
+```
+gendiff file1.yml file2.yml
+```
 [![asciicast](https://asciinema.org/a/tR4BmQ7FKfS9lFRMCHVfojwE4.svg)](https://asciinema.org/a/tR4BmQ7FKfS9lFRMCHVfojwE4)
 
+
+#### Command-line options:
+```
+ -V, --version        output the version number
+ -f, --format <type>  output format
+ -h, --help           display help for command
+```
+---
+#### Technologies and Dependencies
+* **Commander** – A popular tool for building CLI applications.
+* **js-yaml** – For parsing and handling YAML files.
+* **lodash** – Used for deep object comparison.
+* **Jest** – For unit testing.
+
+
+#### Development Tools
+* **ESLint** (Airbnb config) – For code style enforcement and linting.
+* **Jest** – For writing unit tests to ensure the reliability of the tool.
+---
+
+**More examples of the application in action, showcasing output in various formatting options:**
+
+* ###### default:
+```
+$ gendiff <filepath1> <filepath2>
+```
 [![asciicast](https://asciinema.org/a/StsP3mneXwaoVEWDZsSIbW8vh.svg)](https://asciinema.org/a/StsP3mneXwaoVEWDZsSIbW8vh)
 
-###### To display the comparison result in the format plain:
-
-    $ gendiff -f plain <filepath1> <filepath2>
+* ###### plain:
+```
+$ gendiff -f plain <filepath1> <filepath2>
+```
 
 [![asciicast](https://asciinema.org/a/N037EAOWUZ0t6xp9F2zfqSiCG.svg)](https://asciinema.org/a/N037EAOWUZ0t6xp9F2zfqSiCG)
 
-###### To display the comparison result in the format JSON:
-
-    $ gendiff -f json <filepath1> <filepath2>
-
+* ###### JSON:
+```
+$ gendiff -f json <filepath1> <filepath2>
+```
 [![asciicast](https://asciinema.org/a/0kTbEZ8mVwpwwS7fbTxB1zQ6m.svg)](https://asciinema.org/a/0kTbEZ8mVwpwwS7fbTxB1zQ6m)
