@@ -15,26 +15,23 @@ ___
 To use this tool, you'll need Node.js installed on your machine. Then, install the package globally.
 ```
 # Clone the repository
-git clone git@github.com:VladimirMastepanov/JsonYamlDiff.git
+ $ git clone git@github.com:VladimirMastepanov/JsonYamlDiff.git
 
 # Navigate to the project directory
-cd JsonYamlDiff
+ $ cd JsonYamlDiff
 
 # Install dependencies
-npm install
-
-# Optionally, install globally
-npm install -g
+ $ make install-deps
 ```
 
 #### Usage
 To compare two files, run the gendiff command:
 ```
-gendiff <file1> <file2>
+ $ gendiff <file1> <file2>
 ```
 For example:
 ```
-gendiff file1.yml file2.yml
+ $ gendiff file1.yml file2.yml
 ```
 [![asciicast](https://asciinema.org/a/tR4BmQ7FKfS9lFRMCHVfojwE4.svg)](https://asciinema.org/a/tR4BmQ7FKfS9lFRMCHVfojwE4)
 
@@ -62,19 +59,19 @@ gendiff file1.yml file2.yml
 
 * ###### default:
 ```
-$ gendiff <filepath1> <filepath2>
+ $ gendiff <filepath1> <filepath2>
 ```
 [![asciicast](https://asciinema.org/a/StsP3mneXwaoVEWDZsSIbW8vh.svg)](https://asciinema.org/a/StsP3mneXwaoVEWDZsSIbW8vh)
 
 * ###### plain:
 ```
-$ gendiff -f plain <filepath1> <filepath2>
+ $ gendiff -f plain <filepath1> <filepath2>
 ```
 
 [![asciicast](https://asciinema.org/a/N037EAOWUZ0t6xp9F2zfqSiCG.svg)](https://asciinema.org/a/N037EAOWUZ0t6xp9F2zfqSiCG)
 
 * ###### JSON:
 ```
-$ gendiff -f json <filepath1> <filepath2>
+ $ gendiff -f json <filepath1> <filepath2>
 ```
 [![asciicast](https://asciinema.org/a/0kTbEZ8mVwpwwS7fbTxB1zQ6m.svg)](https://asciinema.org/a/0kTbEZ8mVwpwwS7fbTxB1zQ6m)
